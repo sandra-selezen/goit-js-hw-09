@@ -56,7 +56,7 @@ function addLeadingZero(value) {
   return value.toString().padStart(2, '0');
 };
 
-function updateClockface({ days, hours, minutes, seconds }) {
+function updateClockFace({ days, hours, minutes, seconds }) {
   refs.days.textContent = addLeadingZero(days);
   refs.hours.textContent = addLeadingZero(hours);
   refs.minutes.textContent = addLeadingZero(minutes);
@@ -78,7 +78,7 @@ function onClickStartTimer() {
     if (deltaDate < 1000) {
       clearInterval(intervalId);
     }
-    updateClockface(time);
+    updateClockFace(time);
   }, 1000);
 };
 
