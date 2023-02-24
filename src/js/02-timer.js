@@ -3,6 +3,7 @@ import "flatpickr/dist/flatpickr.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const dateInput = document.querySelector("#datetime-picker");
+
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -12,6 +13,7 @@ const options = {
   console.log(selectedDates[0]);
   },
 };
+
 const selectedDate = flatpickr(dateInput, options);
 
 function convertMs(ms) {
@@ -33,9 +35,17 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-function addLeadingZero(value) {
-  padStart();
-}
+// function addLeadingZero(time) {
+  
+// }
+
+// pad(value) {
+//   return String(value).padStart(2, '0');
+// }
+
+// function updateClockface({ days, hours, mins, secs }) {
+//   refs.clockface.textContent = `${days}:${hours}:${mins}:${secs}`;
+// }
 
 console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
 console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
