@@ -11,16 +11,22 @@ const refs = {
   seconds: document.querySelector("[data-seconds]")
 };
 
+let selectedDate = null;
+refs.btnStart.setAttribute("disabled", true);
+
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
+
   onClose(selectedDates) {
     console.log(selectedDates[0]);
     if (selectedDates[0] < Date.now()) {
-      refs.btnStart.setAttribute("disabled", true);
       Notify.failure("Please choose a date in the future");
+    } else {
+      refs.btnStart.removeAttribute("disabled");
+      selectedDate = selectedDates[0];
     }
   },
 };
@@ -56,6 +62,27 @@ function updateClockface({ days, hours, minutes, seconds }) {
   refs.minutes.textContent = addLeadingZero(minutes);
   refs.seconds.textContent = addLeadingZero(seconds);
 };
+
+function onClickStartBtn() {
+  refs.btnStart.setAttribute("disabled", true);
+  refs.dateInput.setAttribute("disabled", true);
+  onClickStartTimer();
+};
+
+function onClickStartTimer() {
+  const intervalId = setInterval(() => {
+    // const currentDate = Date.now();
+    const deltaDate = selectedDate - Date.now();
+    const time = convertMs(deltaDate);
+
+    if (deltaDate < 1000) {
+      clearInterval(intervalId);
+    }
+    updateClockface(time);
+  }, 1000);
+};
+
+refs.btnStart.addEventListener("click", onClickStartBtn);
 
 console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
 console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}

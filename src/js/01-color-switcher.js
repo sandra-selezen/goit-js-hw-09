@@ -5,17 +5,17 @@ function getRandomHexColor() {
 const page = document.body;
 const btnStart = document.querySelector("button[data-start]");
 const btnStop = document.querySelector("button[data-stop]");
-let timerId = null;
+let intervalId = null;
 
 const startChangeColor = () => {
-  timerId = setInterval(() => {
+  intervalId = setInterval(() => {
     btnStart.setAttribute("disabled", true);
     page.style.backgroundColor = getRandomHexColor();
   }, 1000);
 };
 
 const endChangeColor = () => {
-  clearInterval(timerId);
+  clearInterval(intervalId);
   btnStart.removeAttribute("disabled");
   page.style.backgroundColor = "rgb(250, 250, 250)";
 };
