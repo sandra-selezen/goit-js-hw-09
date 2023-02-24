@@ -3,17 +3,25 @@ function getRandomHexColor() {
 }
 
 const page = document.body;
-const color = document.querySelector(".color");
-const button = document.querySelector(".change-color");
+const btnStart = document.querySelector("button[data-start]");
+const btnStop = document.querySelector("button[data-stop]");
+let timerId = null;
 
-const changeColor = event => {
-  let resultColor = getRandomHexColor();
-  page.style.backgroundColor = resultColor;
-  color.textContent = resultColor;
-}
+const startChangeColor = () => {
+  timerId = setInterval(() => {
+    btnStart.setAttribute("disabled", true);
+    page.style.backgroundColor = getRandomHexColor();
+  }, 1000);
+};
 
-button.addEventListener("click", changeColor);
+const endChangeColor = () => {
+  clearInterval(timerId);
+  btnStart.removeAttribute("disabled");
+  page.style.backgroundColor = "rgb(250, 250, 250)";
+};
 
+btnStart.addEventListener("click", startChangeColor);
+btnStop.addEventListener("click", endChangeColor);
 /*
 Write a script that, after clicking the "Start" button, 
 changes the <body> background color once a second to a random value using the inline style. 
