@@ -8,8 +8,8 @@ const btnStop = document.querySelector("button[data-stop]");
 let intervalId = null;
 
 const startChangeColor = () => {
+  btnStart.setAttribute("disabled", true);
   intervalId = setInterval(() => {
-    btnStart.setAttribute("disabled", true);
     page.style.backgroundColor = getRandomHexColor();
   }, 1000);
 };
